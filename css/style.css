@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+:root {
+    --primary: #1B5B50;
+    --secondary: #32A895
+  }
+
+html body{
+    margin: 0px;
+    height: 100vh;
+    overflow: hidden;
+    color: #333;
+    font-family: 'Inter';
+}
+
+*{
+    margin: 0px;
+}
+
+a{
+    text-decoration: none;
+    color: #333;
+}
+
+.background{
+    z-index: 1;
+    position: absolute;
+    top: 0px;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.bg1, .bg2{
+    height: 100vh;
+}
+
+.bg1{
+    flex: 4;
+    background: #C8E9E3;
+}
+
+.bg2{
+    flex: 1;
+    background: #72B5A9;
+}
+
+.container{
+    background: #fff;
+    border-radius: 0px 16px 16px 16px;
+    box-shadow: #33333366 5px 5px 5px 0px;
+    z-index: 10;
+    position: absolute;
+    top: 60px;
+    left: 50px;
+    right: 50px;
+    bottom: 20px;
+}
+
+.container-content{
+    padding: 0px 20px 0px 20px;
+    position: absolute;
+    bottom: 0px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+.menu{
+    position: relative;
+    top: -42px;
+    display: flex;
+}
+
+.menu-item{
+    width: 150px;
+    height: 29px;
+    text-align: center;
+    padding-top: 13px;
+    border-radius: 10px 10px 0px 0px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.menu-item.right{
+    position: absolute;
+    right: 15px;
+}
+
+.menu-item.active{
+    background: #fff;
+}
+
+.menu-item.disactive{
+    background: #eee;
+}
+
+.list{
+    width: 100%;
+}
+
+.list-item{
+    height: 80px;
+    border: solid 1px #1B5B50;
+    border-radius: 20px;
+    position: relative;
+    padding: 15px 0px 0px 40px;
+    
+    margin-bottom: 15px;
+}
+
+.list-item p{
+    margin-top: 5px;
+}
+
+.list-action{
+    background: #1B5B50;
+    width: 60px;
+    height: 98px;
+    position: absolute;
+    right: -1px;
+    top: -1px;
+    border-radius: 0px 20px 20px 0px;
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.list-action i{ 
+    font-size: 120%;
+}
+
+.action-menu{
+    background: #fff;
+    position: absolute;
+    color: #333;
+    width: 140px;
+    border: solid #eee 1px;
+    top: 40px;
+    right: 30px;
+    z-index: 100;
+    box-shadow: #33333366 5px 5px 5px 0px;
+}
+
+.action-menu>div{
+    width: 110px;
+    padding: 15px 15px 15px 15px;
+    font-weight: bold;
+    position: relative;
+    cursor: pointer;
+}
+
+.action-menu>div>div{
+    width: 70;
+}
+
+.action-menu>div i{
+    margin-left: 12px;
+    position: absolute;
+    top: 14px;
+    left: 100px;
+}
+
+.action-menu>div:hover{
+    background: #eee;
+}
+
+.action-menu{
+    display: none;
+}
+
+.hidden-input{
+    display: none;
+}
+
+.dataset-page-content{
+    display: flex;
+    height: 95%;
+    width: 100%;
+    /* padding: 20px; */
+    padding-bottom: 20%;
+    margin-top: 1%;
+}
+
+.form{
+    background: var(--primary);
+    height: 100%;
+    flex: 2;
+    position: relative;
+
+}
+
+.dataset{
+    flex: 8;
+}
+
+.form-submit{
+    position: absolute;
+    bottom: 0px;
+    height: 60px;
+    left: 0px;
+    right: 0px;
+    background: var(--secondary);
+    color: #fff;
+    border: 0px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.form-field{
+    padding: 5% 10% 5% 5%;
+    font-size: 12px;
+}
+
+.form-field label{
+    color: #fff;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-field input{
+    width: 100%;
+    font-size: 14px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 0px;
+}
+
+.form-field textarea{
+    width: 100%;
+    font-size: 14px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 0px;
+}
+
+.form-field input[type=file]{
+    width: 100%;
+    color:#fff;
+    font-size: 14px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 0px;
+}
+
+hr{
+    margin: 0px 10px 0px 10px;
+}
+
+.input-button{
+    margin-top: 5px;
+    background: var(--secondary);
+    color: #fff;
+    border: 0px;
+    cursor: pointer;
+    width: 50%;
+    padding: 5px;
+    border-radius: 5px;
+    align-self: center;
+}
