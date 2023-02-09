@@ -1,7 +1,7 @@
 import { Menu, menus } from "../model/menu.model.js";
 import { MenuView } from "../views/menu.view.js";
 import { Controller } from "./controller.js";
-import { SelectionModel } from "../model/selectionModel.model.js"
+import { Model } from "../model/model.model.js"
 import { uuid } from "../utils.js";
 
 class NewModelController extends Controller {
@@ -16,7 +16,6 @@ class NewModelController extends Controller {
 
     updateViews() {
         this.menuView.render(this.menus)
-
         this.menuView.update()
     }
 
@@ -36,7 +35,7 @@ class NewModelController extends Controller {
                     } catch (e) {
                         throw new Error("error reading file");
                     }
-                    SelectionModel.addLocalSorageModel(importModel)
+                    Model.addModel(importModel)
                 }
                 reader.onerror = function (evt) {
                     throw new Error("error reading file");
@@ -46,7 +45,4 @@ class NewModelController extends Controller {
     }
 }
 
-const newModelController = new NewModelController()
-
-
-console.log(uuid());
+new NewModelController()

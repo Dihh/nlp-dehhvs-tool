@@ -19,7 +19,7 @@ export class SelectionModelView {
                     <div>Deletar</div><i class="fa-solid fa-trash"></i>
                 </div>
             </div>
-            <h1 class="list-item-title"><a href="#">${seletionModel.name}</a></h1>
+            <h1 class="list-item-title"><a href="/dataset.html?id=${seletionModel.id}">${seletionModel.name}</a></h1>
             <p>
                 ${seletionModel.description}
             </p>

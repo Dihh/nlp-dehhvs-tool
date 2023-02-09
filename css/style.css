@@ -15,6 +15,15 @@ html body{
 
 *{
     margin: 0px;
+    font-size: 12px;
+}
+
+h1{
+    font-size: 24px;
+}
+
+h1 a{
+    font-size: 24px;
 }
 
 a{
@@ -58,7 +67,7 @@ a{
 }
 
 .container-content{
-    padding: 0px 20px 0px 20px;
+    padding: 30px 20px 20px 20px;
     position: absolute;
     bottom: 0px;
     top: 0px;
@@ -177,11 +186,10 @@ a{
 
 .dataset-page-content{
     display: flex;
-    height: 95%;
+    height: 100%;
     width: 100%;
     /* padding: 20px; */
-    padding-bottom: 20%;
-    margin-top: 1%;
+    /* padding-bottom: 20%; */
 }
 
 .form{
@@ -194,6 +202,8 @@ a{
 
 .dataset{
     flex: 8;
+    padding-left: 30px;
+    overflow: auto;
 }
 
 .form-submit{
@@ -221,7 +231,7 @@ a{
     margin-bottom: 5px;
 }
 
-.form-field input{
+.form-field input, select{
     width: 100%;
     font-size: 14px;
     padding: 5px;
@@ -260,4 +270,19 @@ hr{
     padding: 5px;
     border-radius: 5px;
     align-self: center;
+}
+
+th, td{
+    padding: 5px 15px 5px 15px;
+    border: 0px;
+    border-bottom: solid 1px;
+}
+
+th{
+    background: var(--primary);
+    color: #fff;
+}
+
+table{
+    border: 0px;
 }

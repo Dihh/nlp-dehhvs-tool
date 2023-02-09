@@ -1,9 +1,10 @@
 export class Menu {
-    constructor(name, active = false, right = false, link = '/') {
+    constructor(name, active = false, right = false, link = '/', id = '') {
         this.name = name
         this.active = active
         this.right = right
-        this.link = link
+        this.id = id
+        this.link = link + `?id=${this.id}`
     }
 }
 
@@ -18,19 +19,19 @@ export const menus = [
     },
     {
         name: 'Transformações',
-        link: '/'
+        link: `/transformations.html`
     },
     {
         name: 'Modelo',
-        link: '/'
+        link: `/`
     },
     {
         name: 'Predições',
-        link: '/'
+        link: `/`
     },
     {
         name: 'Configurações',
-        link: '/',
+        link: `/`,
         right: true
     },
 ]

@@ -1,5 +1,7 @@
 export class Controller {
 
+    params = {}
+
     constructor() { }
 
     updateViews() {

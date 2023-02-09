@@ -20,27 +20,22 @@
                 <div class="form">
                     <form action="">
                         <div class="form-field">
-                            <label for="name">Nome:</label>
-                            <input type="text" name="name" id="name">
+                            <label for="transformer">Transformer:</label>
+                            <select name="transformer" id="transformer"></select>
                         </div>
                         <div class="form-field">
-                            <label for="description">Descrição:</label>
-                            <textarea name="description" id="description" cols="30" rows="5"></textarea>
+                            <label for="textColumn">Coluna de textos:</label>
+                            <select name="textColumn" id="textColumn"></select>
                         </div>
-                        <br>
-                        <div class="on-creating">
-                            <div class="form-field">
-                                <label for="dataset-file">Selecione um arquivo:</label>
-                                <input type="file" name="" id="dataset-file" accept=".csv">
-                            </div>
-                            <hr>
-                            <div class=" form-field">
-                                <label for="dataset-url">URL:</label>
-                                <input type="text" name="" id="dataset-url">
-                                <button type="button" class="input-button">Buscar</button>
-                            </div>
+                        <div class="form-field">
+                            <label for="classColumn">Coluna de Classes:</label>
+                            <select name="classColumn" id="classColumn"></select>
                         </div>
-                        <button type="submit" class="form-submit">Criar</button>
+                        <div class="form-field">
+                            <label for="treatments">Tratamentos:</label>
+                            <select name="treatments" id="treatments" multiple></select>
+                        </div>
+                        <button type="submit" class="form-submit">Transformar</button>
                     </form>
                 </div>
                 <div class="dataset">
@@ -56,7 +51,7 @@
         <div class="bg1"></div>
         <div class="bg2"></div>
     </div>
-    <script src="script/controllers/dataset.controller.js" type="module"></script>
+    <script src="script/controllers/transformations.controller.js" type="module"></script>
 </body>
 
 </html>
