@@ -18,6 +18,7 @@ class TransformationsController extends Controller {
         this.treatments = treatments.map(treatment => new Treatment(treatment.name, treatment.description, treatment.function))
         this.updateViews()
         this.updateMenuOptions()
+        this.transform()
         this.updateDatasetTable()
         this.setHTMLFunction()
     }
@@ -56,10 +57,32 @@ class TransformationsController extends Controller {
             this.transform()
             Model.editModel(this.model, this.model.id)
         })
+        document.querySelector("#treatments").addEventListener("change", () => {
+            const selecteds = Array.from(document.querySelectorAll("#treatments option:checked"))
+            const treatments = selecteds.map(element => element.value)
+            this.model.treatments = treatments
+            this.transform()
+            this.updateDatasetTable()
+        })
+
+        document.querySelector("#textColumn").addEventListener("change", () => {
+            this.model.textColumn = event.target.value
+            this.transform()
+            this.updateDatasetTable()
+        })
+
+        document.querySelector("#classColumn").addEventListener("change", () => {
+            this.model.classColumn = event.target.value
+            this.transform()
+            this.updateDatasetTable()
+        })
+
+
+
     }
 
     updateDatasetTable() {
-        const dataset = this.model.dataset.lines
+        const dataset = this.model.tratedDataset.lines
         const headers = this.model.dataset.headers
         const values = dataset.map(data => Object.values(data))
         document.querySelector("thead").innerHTML = `<tr>${headers.map(header => `<th>${header}</th>`).join('')}</tr>`
@@ -67,14 +90,15 @@ class TransformationsController extends Controller {
     }
 
     transform() {
-        for (const treatment of this.model.treatments) {
-            this.appllyTreaatments(this.model, treatment)
-        }
+        this.model.tratedDataset = { ...this.model.dataset }
+        this.model.treatments.forEach((treatment, index) => {
+            this.appllyTreaatments(this.model, treatment, index)
+        })
     }
 
-    appllyTreaatments(model, treatment) {
+    appllyTreaatments(model, treatment, index) {
         const treatmentFunction = this.treatments.find(treatm => treatm.name == treatment).function
-        treatmentFunction(model)
+        treatmentFunction(model, index)
     }
 }
 
