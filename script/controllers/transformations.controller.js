@@ -14,11 +14,11 @@ class TransformationsController extends Controller {
         this.params = getUrlParams()
         this.menus = menus.map((menu) => new Menu(menu.name, menu.name == 'Transformações', menu.right, menu.link, this.params.id))
         this.model = Model.getModel(this.params.id)
-        this.transformers = transformers.map(transformer => new Transformer(transformer.name, transformer.description))
+        this.transformers = transformers.map(transformer => new Transformer(transformer.name, transformer.description, transformer.fit, transformer.transform))
         this.treatments = treatments.map(treatment => new Treatment(treatment.name, treatment.description, treatment.function))
         this.updateViews()
-        this.updateMenuOptions()
-        this.transform()
+        this.updateFormOptions()
+        this.treat()
         this.updateDatasetTable()
         this.setHTMLFunction()
     }
@@ -28,7 +28,7 @@ class TransformationsController extends Controller {
         this.menuView.update()
     }
 
-    updateMenuOptions() {
+    updateFormOptions() {
         document.querySelector("#transformer").innerHTML = this.transformers.map(transformer =>
             `<option value="${transformer.name}">${transformer.description}</option>`).join('')
 
@@ -46,34 +46,31 @@ class TransformationsController extends Controller {
         document.querySelector("form").addEventListener("submit", () => {
             event.preventDefault()
             const formData = new FormData(event.target);
-            this.model.treatments = []
+            const form = {}
             formData.forEach((value, key) => {
-                if (key == 'treatments') {
-                    this.model[key].push(value)
-                    return
-                }
-                this.model[key] = value;
+                form[key] = value;
             });
-            this.transform()
-            Model.editModel(this.model, this.model.id)
+            this.model.transformerFunction = form.transformer
+            this.transform(form.transformer)
+            Model.editModel(this.model, this.model.id, false)
         })
         document.querySelector("#treatments").addEventListener("change", () => {
             const selecteds = Array.from(document.querySelectorAll("#treatments option:checked"))
             const treatments = selecteds.map(element => element.value)
             this.model.treatments = treatments
-            this.transform()
+            this.treat()
             this.updateDatasetTable()
         })
 
         document.querySelector("#textColumn").addEventListener("change", () => {
             this.model.textColumn = event.target.value
-            this.transform()
+            this.treat()
             this.updateDatasetTable()
         })
 
         document.querySelector("#classColumn").addEventListener("change", () => {
             this.model.classColumn = event.target.value
-            this.transform()
+            this.treat()
             this.updateDatasetTable()
         })
 
@@ -89,11 +86,26 @@ class TransformationsController extends Controller {
         document.querySelector("tbody").innerHTML = values.map(value => `<tr>${value.map(v => `<td>${v}</td>`).join('')}</tr>`).join('')
     }
 
-    transform() {
+    updateTransformTable() {
+        const values = this.model.transformer.lines
+        const headers = this.model.transformer.heads
+        document.querySelector("thead").innerHTML = `<tr><th>${this.model.textColumn}</th>${headers.map(header => `<th>${header}</th>`).join('')}</tr>`
+        document.querySelector("tbody").innerHTML = values.map((value, index) => `<tr><td>${this.model.dataset.lines[index][this.model.textColumn]}</td>${value.map(v => `<td>${v}</td>`).join('')}</tr>`).join('')
+    }
+
+    treat() {
         this.model.tratedDataset = { ...this.model.dataset }
         this.model.treatments.forEach((treatment, index) => {
             this.appllyTreaatments(this.model, treatment, index)
         })
+    }
+
+    transform(transformerFunction) {
+        const transformer = this.transformers.find(transform => transform.name == transformerFunction)
+        this.model.transformer = {}
+        transformer.fit(this.model)
+        transformer.transform(this.model)
+        this.updateTransformTable()
     }
 
     appllyTreaatments(model, treatment, index) {

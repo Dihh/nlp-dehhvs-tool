@@ -23,7 +23,7 @@ export const menus = [
     },
     {
         name: 'Modelo',
-        link: `/`
+        link: `/model.html`
     },
     {
         name: 'Predições',

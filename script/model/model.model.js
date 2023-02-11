@@ -1,17 +1,19 @@
 import { uuid } from "../utils.js";
 
 export class Model {
-    constructor(id, name, description, dataset = "", transformer = '',
-        textColumn = '', classColumn = '', treatments = '', tratedDataset = { headers: [], lines: [] }) {
+    constructor(id, name, description, dataset = "", transformerFunction = '',
+        textColumn = '', classColumn = '', treatments = [], tratedDataset = { headers: [], lines: [] },
+        transformer = { headers: [], lines: [] }) {
         this.id = id
         this.name = name
         this.description = description
         this.dataset = dataset
-        this.transformer = transformer
+        this.transformerFunction = transformerFunction
         this.textColumn = textColumn
         this.classColumn = classColumn
         this.treatments = treatments
         this.tratedDataset = tratedDataset
+        this.transformer = transformer
     }
 
     delete() {
@@ -48,11 +50,11 @@ export class Model {
         return JSON.parse(localStorage.models)
     }
 
-    static editModel(editModel, id) {
+    static editModel(editModel, id, refresh = true) {
         const models = this.getModels()
         const modelIndex = models.findIndex((m) => m.id == id)
         models[modelIndex] = { ...models[modelIndex], ...editModel }
-        this.saveLocalSorageModel(models)
+        this.saveLocalSorageModel(models, refresh)
     }
 
     static addModel(model) {
@@ -62,9 +64,11 @@ export class Model {
         Model.saveLocalSorageModel(localStorageModels)
     }
 
-    static saveLocalSorageModel(models) {
+    static saveLocalSorageModel(models, refresh = true) {
         localStorage.models = JSON.stringify(models)
-        location.reload()
+        if (refresh) {
+            location.href = '/'
+        }
     }
 
     static deleteLodalStorageModel(id) {

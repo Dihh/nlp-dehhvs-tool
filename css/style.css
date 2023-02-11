@@ -200,6 +200,28 @@ a{
 
 }
 
+.multform{
+    height: 100%;
+    flex: 2;
+    position: relative;
+
+}
+
+.pre-form{
+    background: var(--primary);
+    height: 20%;
+    position: relative;
+    margin-bottom: 5%;
+
+}
+
+.pos-form{
+    background: var(--primary);
+    height: 75%;
+    position: relative;
+
+}
+
 .dataset{
     flex: 8;
     padding-left: 30px;
@@ -285,4 +307,42 @@ th{
 
 table{
     border: 0px;
+}
+input[type=range]{
+    -webkit-appearance: none;
+    height: 0px;
+    margin-top: 5px;
+    width: 100%;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: solid 1px #333;
+    border-radius: 50%;
+    background: var(--secondary);
+    cursor: pointer;
+  }
+
+.sub{
+    color: #fff;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+
+}
+
+.full-button{
+    width: 100%;
+    font-size: 25px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--primary);
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
 }
