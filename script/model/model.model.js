@@ -3,7 +3,8 @@ import { uuid } from "../utils.js";
 export class Model {
     constructor(id, name, description, dataset = "", transformerFunction = '',
         textColumn = '', classColumn = '', treatments = [], tratedDataset = { headers: [], lines: [] },
-        transformer = { headers: [], lines: [] }) {
+        transformer = { headers: [], lines: [] }, loss = '', optimizer = '', layers = [],
+        division = { train: 70, test: 30 }) {
         this.id = id
         this.name = name
         this.description = description
@@ -14,6 +15,10 @@ export class Model {
         this.treatments = treatments
         this.tratedDataset = tratedDataset
         this.transformer = transformer
+        this.loss = loss
+        this.optimizer = optimizer
+        this.layers = layers
+        this.division = division
     }
 
     delete() {
@@ -38,11 +43,16 @@ export class Model {
             model.name,
             model.description,
             model.dataset,
-            model.transformer,
+            model.transformerFunction,
             model.textColumn,
             model.classColumn,
             model.treatments,
-            model.tratedDataset
+            model.tratedDataset,
+            model.transformer,
+            model.loss,
+            model.optimizer,
+            model.layers,
+            model.division
         )
     }
 
