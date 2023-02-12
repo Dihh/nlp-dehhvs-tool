@@ -21,6 +21,9 @@ class TransformationsController extends Controller {
         this.updateFormOptions()
         this.updateLayers()
         this.setHTMLFunction()
+        if (this.model.results) {
+            this.updateTables()
+        }
     }
 
     updateViews() {
@@ -35,6 +38,7 @@ class TransformationsController extends Controller {
             `<option value="${optimizer.name}">${optimizer.name}</option>`).join('')
         document.querySelector("#train").innerHTML = this.model.division.train
         document.querySelector("#test").innerHTML = this.model.division.test
+        document.querySelector("#division").value = this.model.division.train
     }
 
     setHTMLFunction() {
@@ -60,7 +64,9 @@ class TransformationsController extends Controller {
             document.querySelector("#train").innerHTML = this.model.division.train
             document.querySelector("#test").innerHTML = this.model.division.test
         }
-
+        document.querySelector("#train-button").addEventListener("click", () => {
+            this.train()
+        })
     }
 
     updateLayers() {
@@ -71,6 +77,96 @@ class TransformationsController extends Controller {
             <h1 class="list-item-title">${layer.name}</h1>
             <p>Loss: ${layer.loss} <br /> Otimizador: ${layer.optimizer}</p>
         </div>`).join('')
+    }
+
+    updateTables() {
+
+        document.querySelector(".confusion-matrix table").innerHTML = `<thead>
+        <tr>
+                <th>#</th>
+                <th>0</th>
+                <th>1</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>0</th>
+                <td>${this.model.results.confusionMatrix['0-0']}</td>
+                <td>${this.model.results.confusionMatrix['0-1']}</td>
+            </tr>
+            <tr>
+                <th>1</th>
+                <td>${this.model.results.confusionMatrix['1-0']}</td>
+                <td>${this.model.results.confusionMatrix['1-1']}</td>
+            </tr>
+        </tbody>`
+
+        document.querySelector(".statistics table").innerHTML = `
+        <tbody>
+            <tr>
+                <th>Acurácia</th>
+                <td>${this.model.results.accuracy || 0}%</td>
+            </tr>
+            <tr>
+                <th>Precisão</th>
+                <td>${this.model.results.precision || 0}%</td>
+            </tr>
+            <tr>
+                <th>Revocação</th>
+                <td>${this.model.results.recall || 0}%</td>
+            </tr>
+        </tbody>
+        `
+    }
+
+    async train() {
+        let [xTrain, xTest, yTrain, yTest] = this.traniTestSplit([...this.model.transformer.lines], [...this.model.transformer.class], this.model.division.test)
+        const [xtrain, xtest, ytrain, ytest] = [tf.tensor(xTrain), tf.tensor(xTest), tf.tensor(yTrain), tf.tensor(yTest)]
+        const model = tf.sequential();
+        model.add(tf.layers.dense({ units: 1, inputShape: [this.model.transformer.heads.length] }));
+        model.compile({
+            loss: 'meanSquaredError',
+            optimizer: 'adam'
+        })
+        await model.fit(xtrain, ytrain, { epochs: 10 })
+        const trainedModel = model
+
+        let result = trainedModel.predict(xtest)
+
+        result = result.arraySync()
+        result = result.map(ele => ele[0] > .5 ? 1 : 0)
+        const yTestArray = ytest.arraySync()
+        const confusionMatrix = result.reduce((confusion, ele, index) => {
+            if (yTestArray[index] == 1 && ele == 1) {
+                confusion['1-1'] += 1
+            }
+            if (yTestArray[index] == 0 && ele == 0) {
+                confusion['0-0'] += 1
+            }
+            if (yTestArray[index] == 0 && ele == 1) {
+                confusion['0-1'] += 1
+            }
+            if (yTestArray[index] == 1 && ele == 0) {
+                confusion['1-0'] += 1
+            }
+            return confusion
+        }, { '1-1': 0, '1-0': 0, '0-1': 0, '0-0': 0 })
+        const accuracy = (confusionMatrix['1-1'] + confusionMatrix['0-0']) / yTestArray.length
+        const precision = (confusionMatrix['1-1']) / (confusionMatrix['1-1'] + confusionMatrix['1-0'])
+        const recall = (confusionMatrix['1-1']) / (confusionMatrix['1-1'] + confusionMatrix['0-1'])
+        this.updateTables(confusionMatrix, accuracy, precision, recall)
+        this.model.results = { confusionMatrix, accuracy, precision, recall }
+        Model.editModel(this.model, this.model.id, false)
+        model.save('localstorage://' + this.model.name)
+    }
+
+    traniTestSplit(xArray, yArray, divider) {
+        const testLength = Math.floor(xArray.length * divider / 100)
+        const xtrain = xArray.splice(testLength)
+        const xtest = xArray
+        const ytrain = yArray.splice(testLength)
+        const ytest = yArray
+        return [xtrain, xtest, ytrain, ytest]
     }
 
 }

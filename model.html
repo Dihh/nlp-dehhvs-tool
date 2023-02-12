@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
 </head>
 
 <body>
@@ -44,14 +45,26 @@
                     </div>
                 </div>
                 <div class="dataset">
-                    <div class="layers">
+                    <div class="layers"></div>
+                    <button class="full-button" id="train-button">Treinar</button>
+                    <div class="tables">
+                        <div class="confusion-matrix">
+                            <div>
+                                <h1>Matriz de confusão</h1>
+                                <table>
 
+                                </table>
+                            </div>
+                        </div>
+                        <div class="statistics">
+                            <div>
+                                <h1>Estatísticas</h1>
+                                <table>
+
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <button class="full-button">Treinar</button>
-                    <table>
-                        <thead></thead>
-                        <tbody></tbody>
-                    </table>
                 </div>
             </div>
         </div>

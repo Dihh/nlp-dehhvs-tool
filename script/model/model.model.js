@@ -4,7 +4,7 @@ export class Model {
     constructor(id, name, description, dataset = "", transformerFunction = '',
         textColumn = '', classColumn = '', treatments = [], tratedDataset = { headers: [], lines: [] },
         transformer = { headers: [], lines: [] }, loss = '', optimizer = '', layers = [],
-        division = { train: 70, test: 30 }) {
+        division = { train: 70, test: 30 }, results = false) {
         this.id = id
         this.name = name
         this.description = description
@@ -19,6 +19,7 @@ export class Model {
         this.optimizer = optimizer
         this.layers = layers
         this.division = division
+        this.results = results
     }
 
     delete() {
@@ -52,7 +53,8 @@ export class Model {
             model.loss,
             model.optimizer,
             model.layers,
-            model.division
+            model.division,
+            model.results
         )
     }
 

@@ -33,6 +33,7 @@ export const transformers = [
                 return bag
             })
             model.transformer.lines = bagsOfThewords
+            model.transformer.class = model.dataset.lines.map(line => parseInt(line[model.classColumn]))
         }
     },
     {
@@ -60,6 +61,7 @@ export const transformers = [
                 return bag
             })
             model.transformer.lines = bagsOfThewords
+            model.transformer.class = model.dataset.lines.map(line => parseInt(line[model.classColumn]))
         }
     },
 ]

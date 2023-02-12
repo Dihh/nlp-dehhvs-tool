@@ -346,3 +346,27 @@ input[type=range]::-webkit-slider-thumb {
     cursor: pointer;
     font-weight: bold;
 }
+
+.tables{
+    display: flex;
+    margin-top: 30px;
+    justify-content: space-around;
+}
+
+.confusion-matrix div{
+    flex-direction: column;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.confusion-matrix table, .statistics table{
+    margin-top: 10px;
+}
+
+.statistics div{
+    flex-direction: column;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
