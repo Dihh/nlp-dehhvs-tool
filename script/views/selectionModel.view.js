@@ -6,6 +6,7 @@ export class SelectionModelView {
     }
 
     render(seletionModels = []) {
+        console.log(1)
         this._template = seletionModels.map(seletionModel => `<div class="list-item">
             <div class="list-action" id="${seletionModel.id}">
                 <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -19,7 +20,7 @@ export class SelectionModelView {
                     <div>Deletar</div><i class="fa-solid fa-trash"></i>
                 </div>
             </div>
-            <h1 class="list-item-title"><a href="nlp-dehhvs-tool/dataset.html?id=${seletionModel.id}">${seletionModel.name}</a></h1>
+            <h1 class="list-item-title"><a href="/nlp-dehhvs-tool/dataset.html?id=${seletionModel.id}">${seletionModel.name}</a></h1>
             <p>
                 ${seletionModel.description}
             </p>
