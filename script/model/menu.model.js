@@ -1,3 +1,4 @@
+import { PATH } from '../utils.js'
 export class Menu {
     constructor(name, active = false, right = false, link = '/', id = '') {
         this.name = name
@@ -11,27 +12,27 @@ export class Menu {
 export const menus = [
     {
         name: 'Seleção',
-        link: '/nlp-dehhvs-tool/'
+        link: `/${PATH}`
     },
     {
         name: 'Dataset',
-        link: '/nlp-dehhvs-tool/dataset.html'
+        link: `/${PATH}dataset.html`
     },
     {
         name: 'Transformações',
-        link: `/nlp-dehhvs-tool/transformations.html`
+        link: `/${PATH}transformations.html`
     },
     {
         name: 'Modelo',
-        link: `/nlp-dehhvs-tool/model.html`
+        link: `/${PATH}model.html`
     },
     {
         name: 'Predições',
-        link: `/nlp-dehhvs-tool/predictions.html`
+        link: `/${PATH}predictions.html`
     },
     {
         name: 'Configurações',
-        link: `/nlp-dehhvs-tool/`,
+        link: `/${PATH}`,
         right: true
     },
 ]

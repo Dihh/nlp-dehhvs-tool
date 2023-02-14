@@ -35,7 +35,7 @@ class TransformationsController extends Controller {
         document.querySelector("#textColumn").innerHTML = this.model.dataset.headers.map(header =>
             `<option value="${header}" ${this.model.textColumn == header ? 'selected' : ''}>${header}</option>`).join('')
         document.querySelector("#classColumn").innerHTML = this.model.dataset.headers.map(header =>
-            `<option value="${header}" ${this.model.classColumns == header ? 'selected' : ''}>${header}</option>`).join('')
+            `<option value="${header}" ${this.model.classColumn == header ? 'selected' : ''}>${header}</option>`).join('')
         document.querySelector("#treatments").innerHTML = this.treatments.map(treatment =>
             `<option value="${treatment.name}" ${this.model.treatments.includes(treatment.name) ? 'selected' : ''}>${treatment.description}</option>`).join('')
     }

@@ -1,3 +1,4 @@
+import { PATH } from '../utils.js'
 export class SelectionModelView {
     _element
 
@@ -20,7 +21,7 @@ export class SelectionModelView {
                     <div>Deletar</div><i class="fa-solid fa-trash"></i>
                 </div>
             </div>
-            <h1 class="list-item-title"><a href="/nlp-dehhvs-tool/dataset.html?id=${seletionModel.id}">${seletionModel.name}</a></h1>
+            <h1 class="list-item-title"><a href="/${PATH}dataset.html?id=${seletionModel.id}">${seletionModel.name}</a></h1>
             <p>
                 ${seletionModel.description}
             </p>

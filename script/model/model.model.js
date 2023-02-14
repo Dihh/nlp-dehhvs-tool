@@ -1,4 +1,4 @@
-import { uuid } from "../utils.js";
+import { uuid, PATH } from "../utils.js";
 
 export class Model {
     constructor(id, name, description, dataset = "", transformerFunction = '',
@@ -77,10 +77,9 @@ export class Model {
     }
 
     static saveLocalSorageModel(models, refresh = true) {
-        console.log('/nlp-dehhvs-tool')
         localStorage.models = JSON.stringify(models)
         if (refresh) {
-            location.href = '/nlp-dehhvs-tool'
+            location.href = `/${PATH}`
         }
     }
 

@@ -65,7 +65,8 @@ class TransformationsController extends Controller {
             document.querySelector("#test").innerHTML = this.model.division.test
         }
         document.querySelector("#train-button").addEventListener("click", () => {
-            this.train()
+            const epochs = document.querySelector("#epochs").value
+            this.train(epochs)
         })
     }
 
@@ -119,7 +120,7 @@ class TransformationsController extends Controller {
         `
     }
 
-    async train() {
+    async train(epochs) {
         let [xTrain, xTest, yTrain, yTest] = this.traniTestSplit([...this.model.transformer.lines], [...this.model.transformer.class], this.model.division.test)
         const [xtrain, xtest, ytrain, ytest] = [tf.tensor(xTrain), tf.tensor(xTest), tf.tensor(yTrain), tf.tensor(yTest)]
         const model = tf.sequential();
@@ -128,7 +129,7 @@ class TransformationsController extends Controller {
             loss: 'meanSquaredError',
             optimizer: 'adam'
         })
-        await model.fit(xtrain, ytrain, { epochs: 10 })
+        await model.fit(xtrain, ytrain, { epochs })
         const trainedModel = model
 
         let result = trainedModel.predict(xtest)
@@ -164,6 +165,7 @@ class TransformationsController extends Controller {
         this.updateTables(confusionMatrix, accuracy, precision, recall)
         Model.editModel(this.model, this.model.id, false)
         model.save('localstorage://' + this.model.name)
+        alert("Modelo treinado")
     }
 
     traniTestSplit(xArray, yArray, divider) {

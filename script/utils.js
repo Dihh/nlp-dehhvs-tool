@@ -54,3 +54,6 @@ export function csvJSON(text, quoteChar = '"', delimiter = ',') {
     });
     return { lines, headers: heads }
 }
+
+export const PATH = 'nlp-dehhvs-tool/'
+// export const PATH = './'
