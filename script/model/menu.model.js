@@ -27,7 +27,7 @@ export const menus = [
     },
     {
         name: 'Predições',
-        link: `/`
+        link: `/predictions.html`
     },
     {
         name: 'Configurações',

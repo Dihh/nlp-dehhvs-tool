@@ -154,8 +154,14 @@ class TransformationsController extends Controller {
         const accuracy = (confusionMatrix['1-1'] + confusionMatrix['0-0']) / yTestArray.length
         const precision = (confusionMatrix['1-1']) / (confusionMatrix['1-1'] + confusionMatrix['1-0'])
         const recall = (confusionMatrix['1-1']) / (confusionMatrix['1-1'] + confusionMatrix['0-1'])
+        this.model.results = {
+            confusionMatrix,
+            accuracy: (accuracy * 100).toFixed(2),
+            precision: (precision * 100).toFixed(2),
+            recall: (recall * 100).toFixed(2)
+        }
+
         this.updateTables(confusionMatrix, accuracy, precision, recall)
-        this.model.results = { confusionMatrix, accuracy, precision, recall }
         Model.editModel(this.model, this.model.id, false)
         model.save('localstorage://' + this.model.name)
     }

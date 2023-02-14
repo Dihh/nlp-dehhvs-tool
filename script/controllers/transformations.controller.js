@@ -88,15 +88,16 @@ class TransformationsController extends Controller {
 
     updateTransformTable() {
         const values = this.model.transformer.lines
-        const headers = this.model.transformer.heads
+        const headers = this.model.transformer.heads.slice(0, 15)
         document.querySelector("thead").innerHTML = `<tr><th>${this.model.textColumn}</th>${headers.map(header => `<th>${header}</th>`).join('')}</tr>`
-        document.querySelector("tbody").innerHTML = values.map((value, index) => `<tr><td>${this.model.dataset.lines[index][this.model.textColumn]}</td>${value.map(v => `<td>${v}</td>`).join('')}</tr>`).join('')
+        document.querySelector("tbody").innerHTML = values.map((value, index) => `<tr><td>${this.model.dataset.lines[index][this.model.textColumn]}</td>${value.map(v => `<td>${v}</td>`).slice(0, 15).join('')}</tr>`).join('')
     }
 
     treat() {
         this.model.tratedDataset = { ...this.model.dataset }
         this.model.treatments.forEach((treatment, index) => {
-            this.appllyTreaatments(this.model, treatment, index)
+            const treatedLines = this.appllyTreaatments(this.model, treatment, index)
+            this.model.tratedDataset.lines = treatedLines
         })
     }
 
@@ -104,13 +105,16 @@ class TransformationsController extends Controller {
         const transformer = this.transformers.find(transform => transform.name == transformerFunction)
         this.model.transformer = {}
         transformer.fit(this.model)
-        transformer.transform(this.model)
+        const transformdModel = transformer.transform(this.model.tratedDataset.lines, this.model.textColumn, this.model.transformer.heads)
+        this.model.transformer.lines = transformdModel
+        this.model.transformer.class = this.model.dataset.lines.map(line => parseInt(line[this.model.classColumn]))
         this.updateTransformTable()
     }
 
     appllyTreaatments(model, treatment, index) {
         const treatmentFunction = this.treatments.find(treatm => treatm.name == treatment).function
-        treatmentFunction(model, index)
+        let dataset = index > 0 ? { ...model.tratedDataset } : { ...model.dataset }
+        return treatmentFunction(dataset.lines, model.textColumn)
     }
 }
 

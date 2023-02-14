@@ -10,43 +10,42 @@ export const treatments = [
     {
         name: 'ponctuations',
         description: 'Remover pontuações',
-        function: (model, treated) => {
-            let dataset = treated ? { ...model.tratedDataset } : { ...model.dataset }
-            model.tratedDataset.lines = [...dataset.lines.map(line => {
+        function: (dataset, textColumn) => {
+            const treatedDataset = [...dataset.map(line => {
                 let newLine
                 newLine = { ...line }
-                newLine[model.textColumn] = newLine[model.textColumn] || ''
-                newLine[model.textColumn] = newLine[model.textColumn].replaceAll(/\.|\?|\"|\'|,|-|–|—|\)|!|:|;|\(|\)|\[|]|…|\//g, '')
+                newLine[textColumn] = newLine[textColumn] || ''
+                newLine[textColumn] = newLine[textColumn].replaceAll(/\.|\?|\"|\'|,|-|–|—|\)|!|:|;|\(|\)|\[|]|…|\//g, '')
                 return newLine
             })]
+            return treatedDataset
         }
     },
     {
         name: 'numbers',
         description: 'Remover números',
-        function: (model, treated) => {
-            let dataset = treated ? { ...model.tratedDataset } : { ...model.dataset }
-            model.tratedDataset.lines = [...dataset.lines.map(line => {
+        function: (dataset, textColumn) => {
+            const treatedDataset = [...dataset.map(line => {
                 let newLine
                 newLine = { ...line }
-                newLine[model.textColumn] = newLine[model.textColumn] || ''
-                newLine[model.textColumn] = newLine[model.textColumn].replaceAll(/[0-9]/g, '')
+                newLine[textColumn] = newLine[textColumn] || ''
+                newLine[textColumn] = newLine[textColumn].replaceAll(/[0-9]/g, '')
                 return newLine
-            })
-            ]
+            })]
+            return treatedDataset
         }
     },
     {
         name: 'stopwords',
         description: 'Remover stopwords',
-        function: (model, treated) => {
-            let dataset = treated ? { ...model.tratedDataset } : { ...model.dataset }
-            model.tratedDataset.lines = [...dataset.lines.map(line => {
+        function: (dataset, textColumn) => {
+            const treatedDataset = [...dataset.map(line => {
                 let newLine
                 newLine = { ...line }
-                newLine[model.textColumn] = newLine[model.textColumn] || ''
+                newLine[textColumn] = newLine[textColumn] || ''
                 return newLine
             })]
+            return treatedDataset
         }
     }
 ]

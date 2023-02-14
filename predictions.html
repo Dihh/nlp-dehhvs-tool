@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+    <style>
+        .pre-form {
+            height: 50%;
+            margin-bottom: 5%;
+
+        }
+
+        .pos-form {
+            height: 45%;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="menu" id="menu"></div>
+        <div class="container-content">
+            <div class="dataset-page-content">
+                <div class="multform">
+                    <div class="pre-form">
+                        <h1>Importar:</h1>
+                        <div class="form-field">
+                            <label for="dataset-file">Selecione um arquivo:</label>
+                            <input type="file" name="" id="dataset-file" accept=".csv">
+                        </div>
+                        <hr>
+                        <div class=" form-field">
+                            <label for="dataset-url">URL:</label>
+                            <input type="text" name="" id="dataset-url">
+                            <button type="button" class="input-button">Buscar</button>
+                        </div>
+                    </div>
+                    <div class="pos-form">
+                        <form action="">
+                            <div class="form-field">
+                                <label for="loss">Novo Texto:</label>
+                                <textarea name="text" id="" cols="20" rows="6"></textarea>
+                            </div>
+                            <button type="submit" class="form-submit">Adicionar</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="dataset">
+                    <div class="texts"></div>
+                    <button class="full-button" id="predict-button">Prever</button>
+                    <table></table>
+                    <button class="full-button-secondary disabled" id="predict-button">Download</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="background">
+        <div class="bg1"></div>
+        <div class="bg2"></div>
+    </div>
+    <script src="script/controllers/predict.controller.js" type="module"></script>
+</body>
+
+</html>

@@ -120,6 +120,7 @@ a{
 
 .list-item p{
     margin-top: 5px;
+    margin-right: 70px;
 }
 
 .list-action{
@@ -213,6 +214,11 @@ a{
     position: relative;
     margin-bottom: 5%;
 
+}
+
+.pre-form h1{
+    color: #FFF;
+    padding: 10px 0px 10px 10px !important;
 }
 
 .pos-form{
@@ -347,6 +353,22 @@ input[type=range]::-webkit-slider-thumb {
     font-weight: bold;
 }
 
+.full-button-secondary{
+    width: 100%;
+    font-size: 25px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--secondary);
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.disabled{
+    display: none;
+}
+
 .tables{
     display: flex;
     margin-top: 30px;
@@ -369,4 +391,12 @@ input[type=range]::-webkit-slider-thumb {
     text-align: center;
     display: flex;
     justify-content: center;
+}
+
+.full-button{
+    margin-bottom: 15px;
+}
+
+.text-column{
+    width: 98%;
 }
