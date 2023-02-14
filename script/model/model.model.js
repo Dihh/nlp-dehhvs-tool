@@ -77,6 +77,7 @@ export class Model {
     }
 
     static saveLocalSorageModel(models, refresh = true) {
+        console.log('/nlp-dehhvs-tool')
         localStorage.models = JSON.stringify(models)
         if (refresh) {
             location.href = '/nlp-dehhvs-tool'
