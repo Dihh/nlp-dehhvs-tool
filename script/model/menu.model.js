@@ -11,27 +11,27 @@ export class Menu {
 export const menus = [
     {
         name: 'Seleção',
-        link: '/'
+        link: '/nlp-dehhvs-tool/'
     },
     {
         name: 'Dataset',
-        link: '/dataset.html'
+        link: '/nlp-dehhvs-tool/dataset.html'
     },
     {
         name: 'Transformações',
-        link: `/transformations.html`
+        link: `/nlp-dehhvs-tool/transformations.html`
     },
     {
         name: 'Modelo',
-        link: `/model.html`
+        link: `/nlp-dehhvs-tool/model.html`
     },
     {
         name: 'Predições',
-        link: `/predictions.html`
+        link: `/nlp-dehhvs-tool/predictions.html`
     },
     {
         name: 'Configurações',
-        link: `/`,
+        link: `/nlp-dehhvs-tool/`,
         right: true
     },
 ]
