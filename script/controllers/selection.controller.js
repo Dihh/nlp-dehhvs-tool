@@ -11,7 +11,6 @@ class SelectionController extends Controller {
         this.menuView = new MenuView(document.querySelector("#menu"))
         this.selectionModelView = new SelectionModelView(document.querySelector("#selectModels"))
         this.menus = menus.map((menu) => new Menu(menu.name, menu.name == 'Seleção', menu.right, menu.link))
-        console.log(this.menus)
         const selectionModels = Model.getModels()
         this.selectionModels = selectionModels.map((selectionModel) => new Model(
             selectionModel.id, selectionModel.name, selectionModel.description

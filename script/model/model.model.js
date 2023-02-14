@@ -79,7 +79,7 @@ export class Model {
     static saveLocalSorageModel(models, refresh = true) {
         localStorage.models = JSON.stringify(models)
         if (refresh) {
-            location.href = '/'
+            location.href = '/nlp-dehhvs-tool'
         }
     }
 
