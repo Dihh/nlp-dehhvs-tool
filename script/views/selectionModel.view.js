@@ -6,7 +6,7 @@ export class SelectionModelView {
     }
 
     render(seletionModels = []) {
-        console.log(12)
+
         this._template = seletionModels.map(seletionModel => `<div class="list-item">
             <div class="list-action" id="${seletionModel.id}">
                 <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -28,6 +28,7 @@ export class SelectionModelView {
     }
 
     update() {
+        console.log(132)
         this._element.innerHTML += this._template
     }
 }
